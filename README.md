@@ -1,24 +1,62 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| nickname           | string | null: false               |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
+| family_name        | string | null: false               |
+| first_name         | string | null: false               |
+| family_name_kana   | string | null: false               |
+| first_name_kana    | string | null: false               |
+| birthday           | date   | null: false               |      
 
-* Ruby version
+ has_many :items
+ has_many :cards
 
-* System dependencies
 
-* Configuration
 
-* Database creation
+##  items テーブル
 
-* Database initialization
+| Column          | Type       | Options                         |
+| --------------- | ---------- | ------------------------------- |
+| image           | string     | null: false                     |
+| name            | string     | null: false                     |
+| explanation     | text       | null: false                     |
+| category_id     | integre    | null: false                     |
+| status_id       | integre    | null: false                     |
+| postage_id      | integre    | null: false                     |
+| prefecture_id   | integre    | null: false                     |
+| shipping_day_id | integre    | null: false                     |
+| price           | integre    | null: false                     |
+| user_id         | references | null: false,  foreign_key: true |
 
-* How to run the test suite
+belongs_to :user
+has_many :card
 
-* Services (job queues, cache servers, search engines, etc.)
+## cards テーブル
 
-* Deployment instructions
+| Column    | Type       | Options                        |
+| --------- | ---------- | ------------------------------ |
+| user_id   | references | null: false, foreign_key: true |
+| item_id   | references | null: false, foreign_key: true |
 
-* ...
+belongs_to :user
+belongs_to :items
+has_one :buyer
+
+## buyers テーブル
+
+| Column         | Type       | Options                         |
+| -------------  | ---------- | ------------------------------- |
+| cards_id       | references | null: false,  foreign_key: true |
+| postal code    | string     | null: false                     |
+| prefectures_id | integer	  | null: false                     |
+| city           | string     | null: false                     |
+| address        | string     | null: false                     |
+| builiding      | string     | null: false                     |
+| phone_number   | string     | null: false                     |
+
+belongs_to : card
