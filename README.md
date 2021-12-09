@@ -14,13 +14,14 @@
 | birthday           | date   | null: false               |      
 
  has_many :items
- has_one :buyer
+ has_many :cards
+
+
 
 ##  items テーブル
 
 | Column          | Type       | Options                         |
 | --------------- | ---------- | ------------------------------- |
-| image           | string     | null: false                     |
 | name            | string     | null: false                     |
 | explanation     | text       | null: false                     |
 | category_id     | integre    | null: false                     |
@@ -29,23 +30,32 @@
 | prefecture_id   | integre    | null: false                     |
 | shipping_day_id | integre    | null: false                     |
 | price           | integre    | null: false                     |
-| user_id         | references | null: false,  foreign_key: true |
+| user            | references | null: false,  foreign_key: true |
 
 belongs_to :user
-belongs_to :buyer
+has_one :card
 
+## cards テーブル
+
+| Column    | Type       | Options                        |
+| --------- | ---------- | ------------------------------ |
+| user      | references | null: false, foreign_key: true |
+| item      | references | null: false, foreign_key: true |
+
+belongs_to :user
+belongs_to :item
+has_one :buyer
 
 ## buyers テーブル
 
 | Column         | Type       | Options                         |
 | -------------  | ---------- | ------------------------------- |
-| cards_id       | references | null: false,  foreign_key: true |
-| postal code    | string     | null: false                     |
-| prefectures_id | integer	  | null: false                     |
+| card           | references | null: false,  foreign_key: true |
+| postal_code    | string     | null: false                     |
+| prefecture_id  | integer    | null: false                     |
 | city           | string     | null: false                     |
 | address        | string     | null: false                     |
-| builiding      | string     | null: false                     |
+| building       | string     |                                 |
 | phone_number   | string     | null: false                     |
 
-has_one :user
-has_many :item
+belongs_to : card
