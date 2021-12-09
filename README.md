@@ -14,9 +14,7 @@
 | birthday           | date   | null: false               |      
 
  has_many :items
- has_many :cards
-
-
+ has_one :buyer
 
 ##  items テーブル
 
@@ -34,18 +32,8 @@
 | user_id         | references | null: false,  foreign_key: true |
 
 belongs_to :user
-has_many :card
+belongs_to :buyer
 
-## cards テーブル
-
-| Column    | Type       | Options                        |
-| --------- | ---------- | ------------------------------ |
-| user_id   | references | null: false, foreign_key: true |
-| item_id   | references | null: false, foreign_key: true |
-
-belongs_to :user
-belongs_to :items
-has_one :buyer
 
 ## buyers テーブル
 
@@ -59,4 +47,5 @@ has_one :buyer
 | builiding      | string     | null: false                     |
 | phone_number   | string     | null: false                     |
 
-belongs_to : card
+has_one :user
+has_many :item
