@@ -24,12 +24,12 @@
 | --------------- | ---------- | ------------------------------- |
 | name            | string     | null: false                     |
 | explanation     | text       | null: false                     |
-| category_id     | integre    | null: false                     |
-| status_id       | integre    | null: false                     |
-| postage_id      | integre    | null: false                     |
-| prefecture_id   | integre    | null: false                     |
-| shipping_day_id | integre    | null: false                     |
-| price           | integre    | null: false                     |
+| category_id     | integer    | null: false                     |
+| status_id       | integer    | null: false                     |
+| postage_id      | integer    | null: false                     |
+| prefecture_id   | integer    | null: false                     |
+| shipping_day_id | integer    | null: false                     |
+| price           | integer    | null: false                     |
 | user            | references | null: false,  foreign_key: true |
 
 belongs_to :user
