@@ -7,7 +7,7 @@ class Item < ApplicationRecord
    # アクティブハッシュとのアソシエーション
   belongs_to :category
   belongs_to :status
-  belongs_to :pastage
+  belongs_to :postage
   belongs_to :prefecture
   belongs_to :shipping_day
 
