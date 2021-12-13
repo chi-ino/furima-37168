@@ -20,6 +20,13 @@ class Item < ApplicationRecord
   validates  :shipping_day_id, null: false
   validates  :price, null: false
   validates  :user, null: false
+  
+  # ジャンルの選択が「--」の時は保存不可
+  validates :category_id, numericality: { other_than: 1 }
+  validates :status_id, numericality: { other_than: 1 }
+  validates :postage_id, numericality: { other_than: 1 }
+  validates :prefecture_id, numericality: { other_than: 1 }
+  validates :shipping_day_id, numericality: { other_than: 1 }
 
 
 end
