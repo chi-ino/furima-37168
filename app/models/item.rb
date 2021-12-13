@@ -7,6 +7,7 @@ class Item < ApplicationRecord
    # アクティブハッシュとのアソシエーション
   belongs_to :category
   belongs_to :status
+  belongs_to :pastage
 
   validates  :name, null: false
   validates  :explanation, null: false 
