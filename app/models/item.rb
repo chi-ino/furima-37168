@@ -9,6 +9,7 @@ class Item < ApplicationRecord
   belongs_to :status
   belongs_to :pastage
   belongs_to :prefecture
+  belongs_to :shipping_day
 
   validates  :name, null: false
   validates  :explanation, null: false 
