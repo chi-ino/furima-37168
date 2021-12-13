@@ -11,6 +11,7 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :shipping_day
 
+    # ジャンルの選択が「--」の時は保存不可
   validates  :name, presence: true
   validates  :explanation, presence: true
   validates  :category_id, presence: true
@@ -21,7 +22,7 @@ class Item < ApplicationRecord
   validates  :price, presence: true
   validates  :user, presence: true
 
-  # ジャンルの選択が「--」の時は保存不可
+
   validates :category_id, numericality: { other_than: 1 }
   validates :status_id, numericality: { other_than: 1 }
   validates :postage_id, numericality: { other_than: 1 }
