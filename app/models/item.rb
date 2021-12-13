@@ -8,6 +8,7 @@ class Item < ApplicationRecord
   belongs_to :category
   belongs_to :status
   belongs_to :pastage
+  belongs_to :prefecture
 
   validates  :name, null: false
   validates  :explanation, null: false 
