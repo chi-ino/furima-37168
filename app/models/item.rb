@@ -1,7 +1,12 @@
 class Item < ApplicationRecord
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  
   belongs_to :user
   has_one_attached :image
   
+   # アクティブハッシュとのアソシエーション
+  belongs_to :category
+
   validates  :name, null: false
   validates  :explanation, null: false 
   validates  :category_id, null: false
