@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
 
   def index
-    @item = Item.all
+    
   end
 
   def new
@@ -19,14 +19,6 @@ class ItemsController < ApplicationController
     end
   end
 
-  def update
-    @item = Item.find(params[:id])
-    if @item.update(item_params) # バリデーションを通過した時
-      redirect_to root_path
-    else # バリデーションに引っかかった時
-      render :edit
-    end
-  end
 
   private
 

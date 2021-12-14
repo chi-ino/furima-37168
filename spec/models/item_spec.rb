@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe Item, type: :model do
   describe 'ユーザー商品出品' do
     before do
-      user = FactoryBot.create(:user)
-      @item = FactoryBot.build(:item, user_id: user.id)
+       #user = FactoryBot.create(:user)
+      @item = FactoryBot.build(:item)
       
     end
 
@@ -16,7 +16,7 @@ RSpec.describe Item, type: :model do
 
     context '商品出品がうまくいかないとき' do
       it 'user_idが存在しなければ出品できない' do
-        @item.user_id = nil
+        @item.user = nil
         @item.valid?
         expect(@item.errors.full_messages).to include('User must exist')
       end
@@ -24,6 +24,11 @@ RSpec.describe Item, type: :model do
         @item.image = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Image can't be blank")
+      end
+      it 'nameが空では出品できない' do
+        @item.name = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Name can't be blank")
       end
       it 'nameが40文字以上では登録できない' do
         @item.name = 'あいうえお かきくけこ さしすせそ たちつてと なにぬねの はひふへほ まみむめも やいゆえよ わ'
@@ -40,27 +45,27 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Explanation is too long (maximum is 1000 characters)')
       end
-      it 'categoryが空では出品できない' do
+      it 'categoryに「---」が選択されている場合は出品できない' do
         @item.category = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
-      it 'statusが空では出品できない' do
+      it 'statusに「---」が選択されている場合は出品できない' do
         @item.status = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Status can't be blank")
       end
-      it 'postageが空では出品できない' do
+      it 'postageに「---」が選択されている場合は出品できない' do
         @item.postage = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Postage can't be blank")
       end
-      it 'prefectureが空では出品できない' do
+      it 'prefectureに「---」が選択されている場合は出品できない' do
         @item.prefecture = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
-      it 'shipping_dayが空では出品できない' do
+      it 'shipping_dayに「---」が選択されている場合は出品できない' do
         @item.shipping_day = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping day can't be blank")
