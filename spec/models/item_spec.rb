@@ -5,6 +5,7 @@ RSpec.describe Item, type: :model do
     before do
       user = FactoryBot.create(:user)
       @item = FactoryBot.build(:item, user_id: user.id)
+      
     end
 
     context '商品出品がうまくいくとき' do
