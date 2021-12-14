@@ -11,7 +11,21 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item(item_params)
+    @item = Item.new(item_params)
+    if @item.save
+      redirect_to root_path
+    else
+      render :new
+    end
+  end
+
+  def update
+    @item = Item.find(params[:id])
+    if @item.update(item_params) #バリデーションを通過した時
+      redirect_to root_path
+    else #バリデーションに引っかかった時
+      render :edit
+    end
   end
 
   private
