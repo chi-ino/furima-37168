@@ -46,27 +46,27 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Explanation is too long (maximum is 1000 characters)')
       end
       it 'categoryに「---」が選択されている場合は出品できない' do
-        @item.category = nil
+        @item.category_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
       it 'statusに「---」が選択されている場合は出品できない' do
-        @item.status = nil
+        @item.status_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Status can't be blank")
       end
       it 'postageに「---」が選択されている場合は出品できない' do
-        @item.postage = nil
+        @item.postage_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Postage can't be blank")
       end
       it 'prefectureに「---」が選択されている場合は出品できない' do
-        @item.prefecture = nil
+        @item.prefecture_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
       it 'shipping_dayに「---」が選択されている場合は出品できない' do
-        @item.shipping_day = nil
+        @item.shipping_day_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping day can't be blank")
       end
