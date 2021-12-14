@@ -5,7 +5,6 @@ RSpec.describe Item, type: :model do
     before do
       user = FactoryBot.create(:user)
       @item = FactoryBot.build(:item, user_id: user.id)
-      
     end
 
     context '商品出品がうまくいくとき' do
@@ -81,7 +80,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Price must be greater than 299')
       end
       it 'priceの範囲が￥9.999.999より下であること' do
-        @item.price = 10000000
+        @item.price = 10_000_000
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be less than 10000000')
       end
