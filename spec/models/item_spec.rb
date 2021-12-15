@@ -3,9 +3,8 @@ require 'rails_helper'
 RSpec.describe Item, type: :model do
   describe 'ユーザー商品出品' do
     before do
-       #user = FactoryBot.create(:user)
+      # user = FactoryBot.create(:user)
       @item = FactoryBot.build(:item)
-      
     end
 
     context '商品出品がうまくいくとき' do
