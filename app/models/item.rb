@@ -22,6 +22,5 @@ class Item < ApplicationRecord
     validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
     validates :shipping_day_id, numericality: { other_than: 0, message: "can't be blank" }
     validates :price, numericality: { only_integer: true, greater_than: 299, less_than: 10_000_000 }
-
   end
 end
