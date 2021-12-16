@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:edit, :show, :update]
+  before_action :set_item, only: [:edit, :show, :update, :destroy]
   before_action :authenticate_user!, only: [:new]
   before_action :move_to_index, except: [:index, :show]
   before_action :contributor_confirmation, only: [:edit, :update]
@@ -30,13 +30,18 @@ class ItemsController < ApplicationController
   def update
     if @item.update(item_params)
       redirect_to item_path
-     else
+    else
       render :edit
     end
   end
-  
 
-  
+  def destroy
+    if @item.destroy
+      redirect_to root_path
+    else
+      render :show
+    end
+  end
 
   private
 
@@ -56,5 +61,4 @@ class ItemsController < ApplicationController
   def contributor_confirmation
     redirect_to root_path unless current_user == @item.user
   end
-
 end
