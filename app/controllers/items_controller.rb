@@ -30,11 +30,11 @@ class ItemsController < ApplicationController
   def update
     if @item.update(item_params)
       redirect_to item_path
-     else
+    else
       render :edit
     end
   end
-  
+
   def destroy
     if @item.destroy
       redirect_to root_path
@@ -42,8 +42,6 @@ class ItemsController < ApplicationController
       render :show
     end
   end
-
-  
 
   private
 
@@ -63,5 +61,4 @@ class ItemsController < ApplicationController
   def contributor_confirmation
     redirect_to root_path unless current_user == @item.user
   end
-
 end
