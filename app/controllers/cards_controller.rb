@@ -1,28 +1,31 @@
 class CardsController < ApplicationController
 
   def index
-    @card_buyer = Cardbuyer.new
+    @card_buyer = CardBuyer.new
+    @item = Item.find(params[:item_id])
+    
+
   end
   
   def create
-    @card_buyer = Cardbuyer.new（card_params)
+    @card_buyer = CardBuyer.new(card_params)
     if @card_buyer.valid?
-      pay_item
       @card_buyer.save
-      redirect_to root_path
+      return redirect_to root_path
     else
-      render :index
+      render 'index'
     end
+ 
+    
   end
 
 
   private
 
-  def  @card_buyer
-    params.permit(:card_buyer).permit(:postal_code, :prefecture_id, :city, :address, :building, :phone_number).merge(
-      user_id: current_user.id, item_id: params[:item_id], token: params[:token]
-    )
+  def card_params
+    params.permit(:card_buyer).permit(:item_id, :postal_code, :city, :address, :building, :phone_number, :prefecture_id)
   end
+  
 
 
 
