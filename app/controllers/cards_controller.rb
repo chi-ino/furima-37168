@@ -1,6 +1,6 @@
 class CardsController < ApplicationController
-  before_action :authenticate_user!, except: :index
   before_action :set_card, only: [:index, :create]
+  before_action :authenticate_user!
   before_action :move_to_index
   
   def index
@@ -14,7 +14,7 @@ class CardsController < ApplicationController
       @card_buyer.save
       return redirect_to root_path
     else
-      render 'index'
+      render :index
     end
   end
 
@@ -22,8 +22,8 @@ class CardsController < ApplicationController
   private
 
   def card_params
-    params.permit(:card_buyer).permit(:item_id, :postal_code, :city, :address, :building, :phone_number, :prefecture_id).merge(
-      user_id: current_user.id, item_id: params[:item_id]
+    params.require(:card_buyer).permit(:postal_code, :city, :address, :building, :phone_number, :prefecture_id).merge(
+      user_id: current_user.id, item_id: params[:item_id], token: params[:token]
     )
   end
   
@@ -35,8 +35,8 @@ class CardsController < ApplicationController
   def pay_item
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
-      amount: order_params[:price],  
-      card: order_params[:token],    
+      amount: card_params.price, 
+      card: card_params[:token],    
       currency: 'jpy'                 
     )
   end
