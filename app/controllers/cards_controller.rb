@@ -1,10 +1,10 @@
 class CardsController < ApplicationController
-
+  before_action :authenticate_user!, except: :index
+  before_action :set_card, only: [:index, :create]
+  before_action :move_to_index
+  
   def index
     @card_buyer = CardBuyer.new
-    @item = Item.find(params[:item_id])
-    
-
   end
   
   def create
@@ -15,18 +15,25 @@ class CardsController < ApplicationController
     else
       render 'index'
     end
- 
-    
   end
 
 
   private
 
   def card_params
-    params.permit(:card_buyer).permit(:item_id, :postal_code, :city, :address, :building, :phone_number, :prefecture_id)
+    params.permit(:card_buyer).permit(:item_id, :postal_code, :city, :address, :building, :phone_number, :prefecture_id).merge(
+      user_id: current_user.id, item_id: params[:item_id]
+    )
   end
   
 
+  def set_card
+    @item = Item.find(params[:item_id])
+  end
 
-
+  def move_to_index
+    if current_user == @item.user || @item.card != nil
+      redirect_to root_path
+    end
+  end
 end
