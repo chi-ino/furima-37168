@@ -68,7 +68,21 @@ RSpec.describe CardBuyer, type: :model do
         @card_buyer.valid?
         expect(@card_buyer.errors.full_messages).to include("Phone number is invalid")
       end
-      
+      it 'itemが紐付いていないと購入できない' do
+        @card_buyer.item_id = nil
+        @card_buyer.valid?
+        expect(@card_buyer.errors.full_messages).to include("Item can't be blank")
+      end
+      it 'userが紐付いていないと購入できない' do
+        @card_buyer.user_id = nil
+        @card_buyer.valid?
+        expect(@card_buyer.errors.full_messages).to include("User can't be blank")
+      end
+      it 'tokenが空では購入できない' do
+        @card_buyer.token = nil
+        @card_buyer.valid?
+        expect(@card_buyer.errors.full_messages).to include("Token can't be blank")
+      end
     end
   end
 end
