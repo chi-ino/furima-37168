@@ -15,7 +15,7 @@ class CardBuyer
   
   def save
     card = Card.create(user_id: user_id, item_id: item_id)
-    Buyer.create(postal_code: postal_code, city: city, address: address, building:🇲building, phone_number: phone_number, prefecture_id: prefecture_id,card_id: card.id)
+    Buyer.create(postal_code: postal_code, city: city, address: address, building: building, phone_number: phone_number, prefecture_id: prefecture_id,card_id: card.id)
   end
 
 end
