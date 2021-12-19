@@ -61,12 +61,12 @@ RSpec.describe CardBuyer, type: :model do
       it 'phoneがハイフンを省かなければ購入できない' do
         @card_buyer.phone_number = '090-1234-5678'
         @card_buyer.valid?
-        expect(@card_buyer.errors.full_messages).to include("Phone number is invalid")
+        expect(@card_buyer.errors.full_messages).to include('Phone number is invalid')
       end
       it 'phoneが半角数値でなければ購入できない' do
         @card_buyer.phone_number = '０９０１２３４５６７８'
         @card_buyer.valid?
-        expect(@card_buyer.errors.full_messages).to include("Phone number is invalid")
+        expect(@card_buyer.errors.full_messages).to include('Phone number is invalid')
       end
       it 'itemが紐付いていないと購入できない' do
         @card_buyer.item_id = nil
